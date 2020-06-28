@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<h1>Link statistics</h1>
+
+<h2>Meta:</h2>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<ul>
+    <li>Original URL: <a target="_blank" href="{{ originalUrl }}">{{ originalUrl }}</a></li>
+    <li>Shortened URL: <a target="_blank" href="{{ url('click_link', {short: shortenedPart}) }}">{{ url('click_link', {short: shortenedPart}) }}</a></li>
+    <li>Link active till: {{ activeTill | date("d.m.Y H:i:s") }}
+    <li>Summary statistics: <a target="_blank" href="{{ url('summary') }}">{{ url('summary') }}</a></li>
+</ul>
+
+<h2>Pivot:</h2>
+<ul>
+    {% for picture, visits in pivot %}
+        <li>{{ picture }}: {{ visits }} visits</li>
+    {% else %}
+        <li><em>Non commercial link</em></li>
+    {% endfor %}
+</ul>
+
+<h2>Visits:</h2>
+<ul>
+    {% set unique = 0 %}
+    {% for item in statistics %}
+        <li>{{ item.clickedAt | date("d.m.Y H:i:s") }} - {{ item.visitorIp.getDotAddress }} - {{ item.pictureName }}</li>
+
+        {% if item.isUnique == true %}
+            {% set unique = unique + 1 %}
+        {% endif %}
+    {% else %}
+        <li><em>No visits yet</em></li>
+    {% endfor %}
+
+    <li><b>{{ unique }} unique of {{ statistics|length }} total visits</b></li>
+</ul>
+
+{% endblock %}

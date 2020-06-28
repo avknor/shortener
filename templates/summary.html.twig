@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Summary for last 14 days</h1>
+    <ul>
+        {% for item in summary %}
+            <li>
+                <a href="{{ url('click_link', {short: item.shortenedPart}) }}" target="_blank">{{ item.shortenedPart }}</a>
+                (<a target="_blank" href="{{ item.originalUrl }}">{{ item.originalUrl }}</a>)
+                - <b>{{ item.unique_visits }} unique visits</b>
+                - <a href="{{ url('link_statistics', {uuid: item.statUrl}) }}">stat</a>
+
+            </li>
+        {% else %}
+            <li><em>Non commercial link</em></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

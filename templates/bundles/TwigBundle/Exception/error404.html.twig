@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Oops! 404!</h1>
+
+    <img src="{{ asset('images/404.jpg') }}" alt="404!"/>
+
+    <p>
+        Can't find page. Maybe you want to <a href="{{ path('add_link') }}">add new link</a>?
+    </p>
+{% endblock %}
