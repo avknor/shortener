@@ -31,7 +31,7 @@ class Link
     private $originalUrl;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $shortenedPart;
 
