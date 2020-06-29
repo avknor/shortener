@@ -33,7 +33,7 @@ class StatisticsController extends AbstractController
     {
         $summary = $this->service->summary();
 
-        return $this->render('summary.html.twig', ['summary'=>$summary]);
+        return $this->render('summary.html.twig', ['summary' => $summary]);
     }
 
     /**
